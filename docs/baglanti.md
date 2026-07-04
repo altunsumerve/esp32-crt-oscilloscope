@@ -4,17 +4,17 @@
 
 **Başlamadan önce: ESP32'nin USB kablosunu ÇIKAR.** Enerjisiz haldeyken bağla, yanlış olursa bir şey yanmaz. Her şey bitince takarsın.
 
-Malzeme: breadboard, ESP32, 1x 220Ω direnç, 2x diyot, jumper kablolar. (Video kısmı zaten kurulu, ona dokunma.)
+Malzeme: breadboard, ESP32, RCA kablosu/soketi, 1x 100Ω direnç, 1x 220Ω direnç, 2x diyot, jumper kablolar.
 
 ---
 
-## BÖLÜM A — Video (ZATEN KURULU, dokunma)
+## BÖLÜM A — Video Bağlantısı (TV Ekranı)
 
-Bunlar duruyor, sadece kontrol et:
+Bu adımlarla ESP32'yi televizyona bağlayarak ekranımızı oluşturuyoruz:
 
-- A1. ESP32 **GPIO26** → sarı RCA fişin **iç pini**
-- A2. ESP32 **GND** → sarı RCA fişin **dış metal** kısmı
-- A3. **100Ω** direnç: bir bacağı GPIO26 hattında, öbür bacağı GND hattında
+- A1. ESP32 **GPIO26** → sarı RCA fişin **iç pini** (sinyal hattı)
+- A2. ESP32 **GND** → sarı RCA fişin **dış metal** kısmı (toprak)
+- A3. **100Ω** direnç: bir bacağı GPIO26 hattında, öbür bacağı GND hattında olacak şekilde bağla (sinyal kalitesi/sonlandırma için).
 
 ---
 

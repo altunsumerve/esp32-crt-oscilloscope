@@ -51,17 +51,27 @@ Tam baglanti ve korumali giris kati: [docs/baglanti.md](docs/baglanti.md).
 
 Kullanim ornekleri (pot & LDR): [docs/ornekler.md](docs/ornekler.md)
 
-## Derleme (PlatformIO + ESP-IDF 4.4)
-```bash
-# 1) ucuncu parti bilesenleri indir ve tek satirlik DAC yamasini uygula
-./scripts/setup.sh        # Windows: powershell -File scripts/setup.ps1
+## Adım Adım Kurulum Kılavuzu
 
-# 2) derle ve yukle (PlatformIO)
-pio run -t upload -t monitor
-```
-`platformio.ini`, `espressif32@5.4.0`'i sabitler; bu da **ESP-IDF 4.4.x** getirir -
-video kutuphanesinin test edildigi surum. Yeni ESP-IDF (5.x) bu kutuphanenin
-dayandigi I2S DAC yolunu kaldirdigi icin surumu yukseltme.
+### 1. Donanım Kurulumu
+ESP32'ye enerji vermeden önce devreyi breadboard üzerinde kurun.
+1. **Video Bağlantısı:** ESP32 **GPIO26 (DAC2)** pinini RCA soketinin orta pinine (video sinyali), **GND** pinini ise RCA soketinin dış metal kısmına bağlayın. GPIO26 hattı ile GND arasına **100 ohm direnç** bağlayın.
+2. **Sinyal Bağlantısı:** Potansiyometre, LDR devresi ya da ölçülecek sinyali **GPIO34 (ADC1_CH6)** pinine bağlayın.
+3. Adım adım detaylı Türkçe bağlantı rehberi için: [docs/baglanti.md](docs/baglanti.md). Devre şeması detayları için: [docs/wiring.md](docs/wiring.md).
+
+### 2. Yazılım Yükleme
+1. **Gerekli Programlar:** [VS Code](https://code.visualstudio.com/) kurun ve içinden **PlatformIO IDE** eklentisini yükleyin.
+2. **Projeyi Açın:** VS Code'da **File > Open Folder...** seçeneğiyle `esp32-crt-oscilloscope` klasörünü açın.
+3. **Kurulum Scriptini Çalıştırın:** Proje klasöründe bir terminal açıp şu komutla bağımlılıkları indirin ve dac yamasını uygulayın:
+   - **Windows (PowerShell):** `powershell -File scripts/setup.ps1`
+   - **Linux / macOS (Bash):** `chmod +x scripts/setup.sh && ./scripts/setup.sh`
+   *(Bu işlem video kütüphanesini indirir ve video çıkışını GPIO26'ya yönlendiren tek satırlık yamayı yapar).*
+4. **Derleme ve Yükleme:**
+   - ESP32'yi USB kablosuyle bilgisayarınıza bağlayın.
+   - VS Code'un alt barındaki **PlatformIO: Upload** (ok işareti) butonuna basın ya da terminalde `pio run -t upload` komutunu çalıştırın.
+5. **Monitör (İsteğe Bağlı):** Logları görmek için alt bardaki **PlatformIO: Serial Monitor** (priz simgesi) butonuna basın ya da terminalde `pio run -t monitor` yazın.
+
+`platformio.ini`, `espressif32@5.4.0`'i sabitler; bu da **ESP-IDF 4.4.x** getirir - video kütüphanesinin test edildiği sürüm. Yeni ESP-IDF (5.x) bu kütüphanenin dayandığı I2S DAC yolunu kaldırdığı için sürümü yükseltmeyin.
 
 ## Sinirlar (kendine karsi durust ol)
 - **Sadece 0-3.3 V giris.** Bolme/zayiflatma yok. Sebekeyi ya da 3.3 V ustunu asla verme.

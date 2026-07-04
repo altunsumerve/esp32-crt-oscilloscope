@@ -50,17 +50,27 @@ Full wiring and the protected input front-end: see [docs/wiring.md](docs/wiring.
 
 Usage examples (pot & LDR): [docs/examples.md](docs/examples.md)
 
-## Build (PlatformIO + ESP-IDF 4.4)
-```bash
-# 1) fetch third-party components and apply the one-line DAC patch
-./scripts/setup.sh        # Windows: powershell -File scripts/setup.ps1
+## Step-by-Step Setup Guide
 
-# 2) build & flash (PlatformIO)
-pio run -t upload -t monitor
-```
-`platformio.ini` pins `espressif32@5.4.0`, which provides **ESP-IDF 4.4.x** — the
-version the video library was tested with. Newer ESP-IDF (5.x) removes the I2S
-DAC path this library relies on, so do not bump it.
+### 1. Hardware Assembly
+Assemble the circuit on a breadboard before powering the ESP32.
+1. **Video Connection:** Connect ESP32 **GPIO26 (DAC2)** to the RCA center pin (video signal) and **GND** to the RCA outer shield (ground). Place a **100 ohm resistor** between the GPIO26 line and GND.
+2. **Signal Connection:** Connect a potentiometer, LDR circuit, or external signal source to **GPIO34 (ADC1_CH6)**.
+3. For step-by-step Turkish instructions, see [docs/baglanti.md](docs/baglanti.md). For circuit schematics details, see [docs/wiring.md](docs/wiring.md).
+
+### 2. Software Installation & Upload
+1. **Install Prerequisites:** Install [VS Code](https://code.visualstudio.com/) and the **PlatformIO IDE** extension.
+2. **Open Project:** Open VS Code, choose **File > Open Folder...**, and select the `esp32-crt-oscilloscope` directory.
+3. **Run Setup Script:** Open the VS Code terminal (or standard terminal) in the project directory and run:
+   - **Windows (PowerShell):** `powershell -File scripts/setup.ps1`
+   - **Linux / macOS (Bash):** `chmod +x scripts/setup.sh && ./scripts/setup.sh`
+   *(This fetches dependency libraries like LVGL and applies the GPIO26 DAC patch).*
+4. **Build & Upload:** 
+   - Connect your ESP32 to your PC via a USB cable.
+   - Click the **PlatformIO: Upload** button (arrow icon in the bottom status bar) or run `pio run -t upload` in the terminal.
+5. **Monitor (Optional):** Click the **PlatformIO: Serial Monitor** button (plug icon) or run `pio run -t monitor` to view logs.
+
+`platformio.ini` pins `espressif32@5.4.0`, which provides **ESP-IDF 4.4.x** — the version the video library was tested with. Newer ESP-IDF (5.x) removes the I2S DAC path this library relies on, so do not bump it.
 
 ## Limits (be honest with yourself)
 - **0-3.3 V inputs only.** No attenuation. Never feed mains or anything above 3.3 V.
