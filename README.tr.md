@@ -49,6 +49,8 @@ bir kumanda dugmesine ceviriyor.
 
 Tam baglanti ve korumali giris kati: [docs/baglanti.md](docs/baglanti.md).
 
+Kullanim ornekleri (pot & LDR): [docs/ornekler.md](docs/ornekler.md)
+
 ## Derleme (PlatformIO + ESP-IDF 4.4)
 ```bash
 # 1) ucuncu parti bilesenleri indir ve tek satirlik DAC yamasini uygula

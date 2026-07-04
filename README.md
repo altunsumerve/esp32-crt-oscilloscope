@@ -48,6 +48,8 @@ turns a potentiometer/LDR into a knob that reshapes a generated waveform.
 
 Full wiring and the protected input front-end: see [docs/wiring.md](docs/wiring.md).
 
+Usage examples (pot & LDR): [docs/examples.md](docs/examples.md)
+
 ## Build (PlatformIO + ESP-IDF 4.4)
 ```bash
 # 1) fetch third-party components and apply the one-line DAC patch
