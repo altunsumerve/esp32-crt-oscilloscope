@@ -1,0 +1,11 @@
+.pio/
+.vscode/
+build/
+sdkconfig
+sdkconfig.old
+components/esp32_composite_video_lib/
+components/lvgl/
+components/lv_conf.h
+*.bin
+*.elf
+*.map
